@@ -85,13 +85,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        <#code#>
+        // If location is found, it is stored in the locations array in the parameter
+        // The last element of the array is the most accurate.
+        let location = locations[locations.count - 1]
     }
     
     
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        <#code#>
+        print(error.localizedDescription)
+        cityLabel.text = "Location not available"
     }
     
     
