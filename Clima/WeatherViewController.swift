@@ -36,6 +36,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             //Ask users to verify GPS use when app is used. 
         locationManager.requestWhenInUseAuthorization()
+            //When GPS is authorized, get the GPS data (asynchronous)
+        locationManager.startUpdatingLocation()
     
         
         
