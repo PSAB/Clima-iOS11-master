@@ -37,6 +37,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             //Ask users to verify GPS use when app is used. 
         locationManager.requestWhenInUseAuthorization()
             //When GPS is authorized, get the GPS data (asynchronous)
+            //because we conformed to the CLLocationManagerDelegate, the
+            //location data will be sent to the class itself.
         locationManager.startUpdatingLocation()
     
         
@@ -82,11 +84,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     //Write the didUpdateLocations method here:
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        <#code#>
+    }
     
     
     //Write the didFailWithError method here:
-    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        <#code#>
+    }
     
     
 
