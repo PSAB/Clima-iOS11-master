@@ -88,6 +88,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         // If location is found, it is stored in the locations array in the parameter
         // The last element of the array is the most accurate.
         let location = locations[locations.count - 1]
+        //check the validity of the location
+        if location.horizontalAccuracy > 0 {
+            // once you get the location, stop updating/hogging battery
+            locationManager.stopUpdatingLocation()
+            
+            print("longitude = \(location.coordinate.longitude)")
+            print ("latitude = \(location.coordinate.latitude)")
+        }
     }
     
     
