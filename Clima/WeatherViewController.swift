@@ -66,8 +66,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             response in
             if response.result.isSuccess {
                 print("Success, got the weather data")
-                let weatherJSON: JSON = response.result.value! as! JSON
-                
+                let weatherJSON: JSON = JSON(response.result.value!)
+                print(weatherJSON)
             }
             else {
                 print("Error: \(response.result.error)")
