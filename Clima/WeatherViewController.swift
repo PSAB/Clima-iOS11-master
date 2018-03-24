@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //TODO: Declare instance variables here
     let locationManager = CLLocationManager()
 
-    
+    var num = 0
     //Pre-linked IBOutlets
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
@@ -114,6 +114,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         if location.horizontalAccuracy > 0 {
             // once you get the location, stop updating/hogging battery
             locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
             
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
