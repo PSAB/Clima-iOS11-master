@@ -9,12 +9,17 @@ import UIKit
 
 
 //Write the protocol declaration here:
-
+protocol ChangeCityDelegate {
+    func userEnteredANewCityName(city: String)
+}
 
 
 class ChangeCityViewController: UIViewController {
+    //Data gets passed back to WeatherViewController, uses delegates and protocols
     
     //Declare the delegate variable here:
+        //This delegate variable is an optional cuz it doesn't have to be filled
+    var delegate: ChangeCityDelegate?
 
     
     //This is the pre-linked IBOutlets to the text field:
