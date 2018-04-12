@@ -28,6 +28,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+    
+    
 
     
     override func viewDidLoad() {
@@ -69,7 +71,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
             if response.result.isSuccess {
                 print("Success, got the weather data")
                 let weatherJSON: JSON = JSON(response.result.value!)
-                //print(weatherJSON)
+               // print(weatherJSON)
                 self.updateWeatherData(json: weatherJSON)
             }
             else {
@@ -117,7 +119,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //Write the updateUIWithWeatherData method here:
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = String(weatherDataModel.temp)
+        temperatureLabel.text = "\(weatherDataModel.temp)°"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
     }
     
@@ -164,7 +166,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     //Write the userEnteredANewCityName Delegate method here:
     func userEnteredANewCityName(city: String) {
-        print(city)
+        //print(city)
+        let params: [String: String] = ["q": city, "appid": APP_ID]
+        getWeatherData(url: WEATHER_URL, parameters: params)
+        print("Got Data from my city")
     }
     
 
