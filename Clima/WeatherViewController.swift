@@ -22,6 +22,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //TODO: Declare instance variables here
     let locationManager = CLLocationManager()
     let weatherDataModel = WeatherDataModel()
+    var tempCelsius = 0.0
 
     var num = 0
     //Pre-linked IBOutlets
@@ -58,7 +59,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     @IBAction func unitSwitch(_ sender: Any) {
         if unitChangeSwitch.isOn == true {
-            print("hooray!")
+           // temperatureLabel.text = ""
+            temperatureLabel.text = "\(Int((1.8 * tempCelsius) + 32))"
+            temperatureLabel.text?.append("°F")
+        }
+        if unitChangeSwitch.isOn == false {
+            //temperatureLabel.text = ""
+            temperatureLabel.text = "\(Int(tempCelsius))"
+            //temperatureLabel.text = "\((Int((Double(temperatureLabel.text!)! - 32)/1.8)))"
+            temperatureLabel.text?.append("°C")
         }
     }
     
@@ -104,7 +113,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         // if data was not returned properly, tempResult would be nil & else statement would execute
         if let tempResult = json["main"]["temp"].double {
         print(tempResult)
-        
+        tempCelsius = tempResult - 273.15
         weatherDataModel.temp = Int(tempResult - 273.15)
         weatherDataModel.city = json["name"].stringValue
         weatherDataModel.condition = json["weather"][0]["id"].intValue
@@ -129,7 +138,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //Write the updateUIWithWeatherData method here:
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = "\(weatherDataModel.temp)°"
+        temperatureLabel.text = "\(weatherDataModel.temp)°C"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
     }
     
@@ -188,6 +197,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "changeCityName") {
+            // Set back to celsius because this VC always starts at celsius
+            unitChangeSwitch.isOn = false
             //create a temporary variable to refer to the ChangeCityViewController
             let destinationVC = segue.destination as! ChangeCityViewController
             //set the delegate of WeatherViewController.swift to the delegate that you just created
