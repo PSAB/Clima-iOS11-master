@@ -28,13 +28,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+   
+    @IBOutlet weak var unitChangeSwitch: UISwitch!
     
     
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // set the unitChangeSwitch to off position
+        unitChangeSwitch.isOn = false
         
         //TODO:Set up the location manager here.
         locationManager.delegate = self
@@ -51,6 +55,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
     }
     
+    
+    @IBAction func unitSwitch(_ sender: Any) {
+        if unitChangeSwitch.isOn == true {
+            print("hooray!")
+        }
+    }
     
     
     //MARK: - Networking
